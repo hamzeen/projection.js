@@ -1,0 +1,81 @@
+@font-face {
+    font-family: "Roboto-Thin";
+    src: url("fonts/Roboto-Thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+}
+
+* {
+  padding: 0;margin:0;
+}
+body {
+  font-family: "Roboto-Thin", sans-serif;
+  font-weight: 400;
+  text-align: center;
+
+  min-width:300px;
+  width: auto !important;
+  width:300px;
+}
+
+#title {
+  height: 200px;
+  background: #FEE; /*rgba(20,90,20,.3)*/
+  vertical-align: middle;
+  line-height: 200px;
+  font-size: 39px;
+}
+
+#demo {
+  height: 550px;
+	background: url('images/img_001.jpg');
+	background-position: 25% 0%;
+}
+
+#upload {
+  padding: 20px;
+}
+#btn-upload {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  width: 160px;
+  margin:20px auto;
+  cursor: pointer;
+  border-radius: 2px 2px;
+
+  box-shadow: -3px 4px 2px -1px rgba(0, 0, 0, 0.3);
+  -webkit-transition: all .1s ease;
+  -moz-transition: all .1s ease;
+  transition: all .1s ease;
+  -ms-transition: all .1s ease;
+  -o-transition: all .1s ease;
+}
+#btn-upload:hover {
+  box-shadow: -2px 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+
+#credits {
+    width: 100%;
+    height:40px;
+    padding-bottom: 10px;
+    margin-top: 5px;
+    border-top: 1px solid #EEE;
+}
+.author {
+    float: right;
+    font-size: 15px;
+    margin-top: 18px;
+    padding-right: 30px;
+    cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
