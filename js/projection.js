@@ -16,9 +16,8 @@ $(document).ready(function() {
 	reader.onload = function(e) {
         	var img = new Image();
         	img.src = reader.result;
+		fileDisplayArea.innerHTML = '';
 		if(img.height > 300) {
-			fileDisplayArea.innerHTML = '';// +img.height;
-          		console.log(img.height);
 			$("#demo").css('height', Math.ceil((img.height)*.99) + 'px');
 		}
         	$("#demo").css('background', 'url(' + reader.result + ')');
