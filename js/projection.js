@@ -12,22 +12,22 @@ $(document).ready(function() {
 			var imageType = /image.*/;
 
       if (file.type.match(imageType)) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-          	var img = new Image();
-          	img.src = reader.result;
-		fileDisplayArea.innerHTML = 's: '+img.height;
-          	console.log(img.height);
-					
-
-		$("#demo").css('height', Math.ceil((img.height)*.99) + 'px');
-          	$("#demo").css('background', 'url(' + reader.result + ')');
-				}
-				reader.readAsDataURL(file);
-			} else {
-				fileDisplayArea.innerHTML = "File not supported!"
-			}
-		});
+	var reader = new FileReader();
+	reader.onload = function(e) {
+        	var img = new Image();
+        	img.src = reader.result;
+		if(img.height > 300) {
+			fileDisplayArea.innerHTML = '';// +img.height;
+          		console.log(img.height);
+			$("#demo").css('height', Math.ceil((img.height)*.99) + 'px');
+		}
+        	$("#demo").css('background', 'url(' + reader.result + ')');
+      	}
+	reader.readAsDataURL(file);
+      } else {
+	fileDisplayArea.innerHTML = "File not supported!"
+      }
+});
 
   var has_touch = 'ontouchstart' in document.documentElement;
 	var accX, width, height, xA, accXLast;
