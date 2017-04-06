@@ -32,18 +32,7 @@ $(document).ready(function() {
 			var imageType = /image.*/;
 
       if (file.type.match(imageType)) {
-	       /*var reader = new FileReader();
-	       reader.onload = function(e) {
-           var img = new Image();
-           img.src = reader.result;
-		       fileDisplayArea.innerHTML = '';
-		       if(img.height > 300) {
-			          $("#demo").css('height', Math.ceil((img.height)*.99) + 'px');
-		       }
-           $("#demo").css('background', 'url(' + reader.result + ')');
-      	 }
-	       reader.readAsDataURL(file);*/
-
+	 
          var image = readFile(file)
            .then(function (data) {
              fileDisplayArea.innerHTML = "";
@@ -52,7 +41,7 @@ $(document).ready(function() {
                $("#demo").css('height', Math.ceil((data.height)*.99) + 'px');
              }
              $("#demo").css('background', 'url(' + data.src + ')');
-             $("#demo").css({'background-position': 50+'% ' + 50+'%'});
+             $("#demo").css({'background-position': 25+'% ' + 50+'%'});
            })
            .catch(function(err) {
              $("#wip").removeClass("show");
