@@ -1,3 +1,23 @@
+/* this method returns a promise */
+function readFile(file) {
+    $("#wip").addClass("show");
+    var reader = new FileReader();
+    var deferred = $.Deferred();
+
+    reader.onload = function(event) {
+        var img = new Image();
+        img.src = event.target.result;
+        deferred.resolve(img);
+    };
+
+    reader.onerror = function() {
+        deferred.reject(this);
+    };
+
+    reader.readAsDataURL(file);
+    return deferred.promise();
+}
+
 $("#btn-upload").click(function() {
   $("#file-projection").click();
   console.log('hello');
@@ -12,19 +32,34 @@ $(document).ready(function() {
 			var imageType = /image.*/;
 
       if (file.type.match(imageType)) {
-	var reader = new FileReader();
-	reader.onload = function(e) {
-        	var img = new Image();
-        	img.src = reader.result;
-		fileDisplayArea.innerHTML = '';
-		if(img.height > 300) {
-			$("#demo").css('height', Math.ceil((img.height)*.99) + 'px');
-		}
-        	$("#demo").css('background', 'url(' + reader.result + ')');
-      	}
-	reader.readAsDataURL(file);
+	       /*var reader = new FileReader();
+	       reader.onload = function(e) {
+           var img = new Image();
+           img.src = reader.result;
+		       fileDisplayArea.innerHTML = '';
+		       if(img.height > 300) {
+			          $("#demo").css('height', Math.ceil((img.height)*.99) + 'px');
+		       }
+           $("#demo").css('background', 'url(' + reader.result + ')');
+      	 }
+	       reader.readAsDataURL(file);*/
+
+         var image = readFile(file)
+           .then(function (data) {
+             fileDisplayArea.innerHTML = "";
+             $("#wip").removeClass("show");// remove spinner
+             if(data.height <= 700) {
+               $("#demo").css('height', Math.ceil((data.height)*.99) + 'px');
+             }
+             $("#demo").css('background', 'url(' + data.src + ')');
+             $("#demo").css({'background-position': 50+'% ' + 50+'%'});
+           })
+           .catch(function(err) {
+             $("#wip").removeClass("show");
+             fileDisplayArea.innerHTML = "Could not load your file";
+           });
       } else {
-	fileDisplayArea.innerHTML = "File not supported!"
+	       fileDisplayArea.innerHTML = "File not supported!"
       }
 });
 
@@ -37,13 +72,13 @@ $(document).ready(function() {
         if(typeof accXLast == 'undefined' || Math.abs(accX - accXLast) > 0.021) {
           accXLast = accX;
           xA = ((accX*25) + 25).toFixed(1);
-  	      $('#demo').css({'background-position': xA+'% '+ 0+'%'});
+  	      $('#demo').css({'background-position': xA+'% '+ 50+'%'});
         }
 		}
 	} else {
     $('#demo').mousemove(function(e) {
       xA = e.pageX / $(this).width() * 50;
-      $(this).css({'background-position': xA+'% ' +0+'%'});
+      $(this).css({'background-position': xA+'% ' + 50+'%'});
 		});
   }
 });
